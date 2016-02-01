@@ -1,16 +1,14 @@
 # cu-unis
 
-Aim: Generate a better directory for Columbia University, including an API.
+### Overview
+Added functionality to get all the unis and information of everyone at Columbia using Cunix. In a nut shell, every uni at columbia has a home directory within the cunix cloud. Scraping all the directory names returns all the unis that are in use at Columbia. This will **only work if run from cunix**
 
-Each student has a folder in UNIX where the title is their UNI.
+### Implementation
+This is a continuation of the research done by @fabiodesousa. His original work utilized the find command in order to list all the buckets but I improved performance by just using ```ls */*``` from the top level directory to get all the directory names and hence unis. From there, a lookup is done on every uni to grab the information on the individual from cunix. Some of the folder names are not valid unis and so will either return No information from the lookup or will open shell prompts which I automatically pass. 
 
-./  
-../u  
-../1 through 11  
-.../a through z  
-..../unis beginning with that letter  
-...../unique folder each student SSHs into  
+### Running
+Just run ```python ingest.py [format]``` with format being ```-csv``` or ```-json``` in order to output the data to a specific format. The default format with no flag is csv.
 
-By going into one of the numbered folders (e.g. /u/10), you can use a bash script to get all of the unis. Ex:
-
-find . -maxdepth 2 -type d > ../[number folder your uni is in]/[first letter of your uni]/[your uni]/[text file]
+### Notes
+* Not every field exists for every uni. Columbia undergrads tend to have departments while staff like maintenance does not. 
+* Don't use this for spam, it was made for research purposes
